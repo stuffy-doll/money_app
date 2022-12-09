@@ -29,6 +29,17 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6, 20]
+      }
     }
   },
     {
@@ -49,8 +60,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.prototype.toSafeObject = function () {
-    const { id, username, email } = this;
-    return { id, username, email };
+    const { id, username, email, name, tag } = this;
+    return { id, username, email, name, tag };
   };
 
   User.prototype.validatePassword = function (password) {
@@ -67,7 +78,8 @@ module.exports = (sequelize, DataTypes) => {
       where: {
         [Op.or]: {
           username: credential,
-          email: credential
+          email: credential,
+          tag: credential,
         }
       }
     });
@@ -76,18 +88,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, tag, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
+      tag,
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);
-  }
+  };
 
   User.associate = function (models) {
-    // associations can be defined here
+    User.hasOne(models.Wallet, { foreignKey: "user_id", as: "wallet" });
+    User.hasMany(models.Transaction, { foreignKey: "user_id" });
+    User.belongsTo(models.Transaction, { foreignKey: "to_id" });
   };
   return User;
 };

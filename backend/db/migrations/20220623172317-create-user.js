@@ -18,6 +18,15 @@ module.exports = {
         type: Sequelize.STRING(256),
         unique: true
       },
+      name: {
+        allowNull: true,
+        type: Sequelize.STRING(256),
+      },
+      tag: {
+        allowNull: false,
+        type: Sequelize.STRING(20),
+        unique: true
+      },
       hashedPassword: {
         allowNull: false,
         type: Sequelize.STRING.BINARY
