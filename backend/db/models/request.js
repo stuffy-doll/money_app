@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     expires: DataTypes.DATE
   }, {});
   Request.associate = function (models) {
-    Request.belongesTo(models.User, { foreignKey: "user_id", as: "requestee" });
+    Request.belongsTo(models.User, { foreignKey: "user_id", as: "requestee" });
     Request.hasOne(models.User, { foreignKey: "user_id", as: "payee" });
   };
   return Request;
