@@ -99,6 +99,20 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(user.id);
   };
 
+  const followingMappings = {
+    through: "Follows",
+    foreignKey: "follower_id",
+    otherKey: "following_id",
+    as: "following"
+  };
+
+  const followerMappings = {
+    through: "Follows",
+    foreignKey: "following_id",
+    otherKey: "follower_id",
+    as: "followers"
+  };
+
   User.associate = function (models) {
     User.hasOne(models.Wallet, { foreignKey: "user_id", as: "wallet" });
     User.hasMany(models.Transaction, { foreignKey: "user_id", as: "transactions" });
