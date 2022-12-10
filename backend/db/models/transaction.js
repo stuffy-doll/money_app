@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Transaction.associate = function (models) {
     Transaction.belongsTo(models.User, { foreignKey: "user_id", as: "sender" });
     Transaction.hasOne(models.User, { foreignKey: "user_id", as: "receiver" });
+    Transaction.hasMany(models.Comment, { foreignKey: "transaction_id", as: "comments" });
   };
   return Transaction;
 };
