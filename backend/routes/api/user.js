@@ -27,10 +27,18 @@ const validateSignup = [
 
 // Signup
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
-  const user = await User.signup({ username, email, password });
+  const { username, email, tag, password } = req.body;
+  const user = await User.signup({ username, email, tag, password });
   await setTokenCookie(res, user);
   return res.json({ user });
 }));
+
+// Update Name
+router.update('/', validateName, asyncHandler(async (req, res) => {
+  const { user_id, name } = req.body;
+  const user = await User.findByPk(user_id);
+  user.name = name;
+  return res.json({ user });
+}))
 
 module.exports = router;
