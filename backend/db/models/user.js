@@ -101,10 +101,11 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     User.hasOne(models.Wallet, { foreignKey: "user_id", as: "wallet" });
-    User.hasMany(models.Transaction, { foreignKey: "user_id" });
+    User.hasMany(models.Transaction, { foreignKey: "user_id", as: "transactions" });
     User.belongsTo(models.Transaction, { foreignKey: "to_id" });
-    User.hasMany(models.Request, { foreignKey: "user_id" });
+    User.hasMany(models.Request, { foreignKey: "user_id", as: "requests" });
     User.belongsTo(models.Request, { foriegnKey: "to_id" });
+    User.hasOne(models.Inbox, { foreignKey: "user_id", as: "inbox" });
   };
   return User;
 };
