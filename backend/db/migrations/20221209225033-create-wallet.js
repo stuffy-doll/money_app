@@ -9,13 +9,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Users" },
+        allowNull: false
       },
       pin: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       amount: {
-        type: Sequelize.DECIMAL(12, 2)
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

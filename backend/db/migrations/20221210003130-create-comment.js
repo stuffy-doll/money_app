@@ -9,10 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Users" },
+        allowNull: false
       },
       transaction_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Transactions" },
+        allowNull: false
       },
       content: {
         type: Sequelize.TEXT

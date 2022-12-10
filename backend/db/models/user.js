@@ -120,6 +120,8 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Request, { foreignKey: "user_id", as: "requests" });
     User.belongsTo(models.Request, { foriegnKey: "to_id" });
     User.hasOne(models.Inbox, { foreignKey: "user_id", as: "inbox" });
+    User.hasMany(models.User, followerMappings);
+    User.belongsToMany(models.User, followingMappings);
   };
   return User;
 };

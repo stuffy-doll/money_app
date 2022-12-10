@@ -9,10 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       inbox_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Inboxes" },
+        allowNull: false
       },
       message: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       read: {
         type: Sequelize.BOOLEAN
