@@ -42,3 +42,5 @@ router.patch('/withdraw', asyncHandler(async (req, res) => {
     message: 'Unsuccessful'
   };
 }));
+
+module.exports = router;

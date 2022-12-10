@@ -9,6 +9,13 @@ module.exports = {
         content: "Thanks!",
         createdAt: new Date(Date.now()),
         updatedAt: new Date(Date.now())
+      },
+      {
+        user_id: 1,
+        transaction_id: 1,
+        content: "You're welcome!",
+        createdAt: new Date(Date.now()),
+        updatedAt: new Date(Date.now())
       }
     ], {});
   },
